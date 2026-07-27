@@ -4,11 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Force Fitness</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="src/output.css" rel="stylesheet">
 </head>
 <body>
-    <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+     <section class="" id="home">
+        <div class="flex justify-between md:justify-around items-center px-2 pt-2">
+            <div
+                class="flex flex-col leading-[1.1] font-black md:font-semibold font-['Impact','Haettenschweiler','Arial_Narrow_Bold',sans-serif]">
+                <span class="text-[2rem] tracking-[2px]">Force</span>
+                <span class="text-[1.4rem] tracking-[3px] opacity-80">Fitness</span>
+            </div>
+            <nav class="nav-links-container">
+                <ul class="hidden mg:block md:flex space-x-4 text-lg ">
+                    <li><a href="#home" class="hover:text-[#4D4D4D]">Home</a></li>
+                    <li><a href="#features" class="hover:text-[#4D4D4D]">Features</a></li>
+                    <li><a href="#trainers" class="hover:text-[#4D4D4D]">Trainers</a></li>
+                    <li><a href="#pricing" class="hover:text-[#4D4D4D]">Pricing</a></li>
+                    <li><a href="#contact" class="hover:text-[#4D4D4D]">Contact</a></li>
+                </ul>
+            </nav>
+            <button
+                class="bg-[#4D4D4D] hidden md:block px-6 py-2 text-white font-bold rounded-4xl cursor-pointer hover:bg-white border hover:text-black transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">Join
+                Now</button>
+            <button id="menuBtn" class="md:hidden flex flex-col justify-center items-center gap-1.5 p-2">
+                <span class="line w-6 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="line w-6 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="line w-6 h-0.5 bg-black transition-all duration-300"></span>
+            </button>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden flex-col items-center gap-6 py-6">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Programs</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
