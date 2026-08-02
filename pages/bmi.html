@@ -13,12 +13,43 @@
             background-color: #ffffff;
             border-radius: 14px;
         }
+
+        #bmi-heading {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
     </style>
 </head>
 
 <body>
     <section class="m-10 p-10 h-[85vh]" id="bmi-Container">
+        <div class="">
 
+            <div class="h-16">
+                <h1 class="text-4xl font-black underline " id="bmi-heading">BMI Calculator</h1>
+            </div>
+
+            <div class="grid grid-cols-2 grid-rows-2 gap-2 w-90">
+
+                <div class="flex flex-col justify-center">
+                    <label for="number" class="font-semibold">Height</label>
+                    <input type="number" placeholder="Enter Height" class="border rounded h-8 p-4 w-40">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <label for="number" class="font-semibold">Weight</label>
+                    <input type="number" placeholder="Enter Weight" class="border rounded h-8 p-4 w-40">
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                    <button class="hover:border w-screen h-9 rounded-4xl  bg-[#4D4D4D] text-white text-xl font-bold cursor-pointer transition-transform duration-125 ease-in-out active:scale-[0.96]">Calculate</button>
+                </div>
+            </div>
+
+            <div class="border-t border-dashed border-gray-900 w-90"></div>
+            <div>
+                <h2 class="font-bold text-xl font-sans underline">Your BMI</h2>
+                <p class="font-semibold">22.1</p>
+            </div>
+        </div>
+        
     </section>
 </body>
 
