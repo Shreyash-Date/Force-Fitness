@@ -3,65 +3,104 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI-Calculator</title>
-    <link href="../src/output.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BMI Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../src/output.css">
     <style>
-        #bmi-Container {
-            box-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 14px;
-        }
-
-        #bmi-heading {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        #app {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .18)
         }
     </style>
 </head>
 
-<body>
-    <section class="m-10 p-10 h-[85vh]" id="bmi-Container">
-        <div class="">
+<body class="bg-slate-100 h-screen flex items-center justify-center">
+    <div id="app" class="bg-white w-[95vw] max-w-7xl md:h-[92vh] h-fit rounded-3xl p-8 grid lg:grid-cols-2 gap-8">
 
-            <div class="h-16">
-                <h1 class="text-4xl font-black underline " id="bmi-heading">BMI Calculator</h1>
+        <div class="flex flex-col justify-center">
+            <h1 class="text-5xl font-black mb-10">BMI <span class="underline">Calculator</span></h1>
+
+            <div class="grid grid-cols-2 gap-5">
+                <div><label class="font-semibold">Height</label>
+                    <div class="relative"><input id="height" type="number" placeholder="180"
+                            class="w-full border rounded-xl p-3 pr-12 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <span class="absolute right-4 top-3 text-gray-400">cm</span>
+                    </div>
+                </div>
+
+                <div><label class="font-semibold">Weight</label>
+                    <div class="relative"><input id="weight" type="number" placeholder="70"
+                            class="w-full border rounded-xl p-3 pr-12 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <span class="absolute right-4 top-3 text-gray-400">kg</span>
+                    </div>
+                </div>
+
+                <div><label class="font-semibold">Age</label>
+                    <input id="age" type="number" placeholder="20"
+                        class="w-full border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Gender</label>
+                    <select id="gender" class="w-full border rounded-xl p-3">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="grid grid-cols-2 grid-rows-2 gap-2 w-90">
-
-                <div class="flex flex-col justify-center relative">
-                    <label for="number" class="font-semibold">Height</label>
-                    <input type="number" placeholder="Enter Height" class="border rounded h-8 p-4 w-40 focus:outline-none focus:border-gray-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        id="height-value">
-                    <span class="absolute right-5 top-7 text-xl text-gray-400 pointer-events-none">
-                        cm
-                    </span>
-                </div>
-                <div class="flex flex-col justify-center relative">
-                    <label for="number" class="font-semibold">Weight</label>
-                    <input type="number" placeholder="Enter Weight" class="border rounded h-8 p-4 w-40 focus:outline-none focus:border-gray-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        id="weight-value">
-                        <span class="absolute right-5 top-7 text-xl text-gray-400 pointer-events-none">
-                        kg
-                    </span>
-                </div>
-                <div class="flex justify-center items-center col-span-2">
-                    <button
-                        class="hover:border w-screen h-9 rounded-4xl  bg-[#4D4D4D] text-white text-xl font-bold cursor-pointer transition-transform duration-125 ease-in-out active:scale-[0.96]"
-                        id="calc-btn">Calculate</button>
-                </div>
+            <div class="flex gap-4 mt-8">
+                <button id="calc"
+                    class="flex-1 bg-[#4D4D4D] text-white rounded-full py-3 font-bold hover:scale-105 active:scale-95 transition">Calculate</button>
+                <button id="clear" class="px-8 border rounded-full hover:bg-gray-100">Clear</button>
             </div>
 
-            <div class="border-t border-dashed border-gray-900 w-90"></div>
-            <div>
-                <h2 class="font-bold text-xl font-sans underline">Your BMI</h2>
-                <p class="font-semibold" id="final-bmi">----</p>
-            </div>
+            <p id="error" class="hidden mt-5 bg-red-100 text-red-700 rounded-xl p-3"></p>
         </div>
 
-    </section>
+        <div class="flex flex-col justify-center">
+            <div class="bg-gray-100 rounded-3xl p-6 h-full flex flex-col">
+
+                <div class="flex justify-center">
+                    <div class="relative w-56 h-56">
+                        <svg class="-rotate-90" width="224" height="224">
+                            <circle cx="112" cy="112" r="90" stroke="#d1d5db" stroke-width="18" fill="none" />
+                            <circle id="progress" cx="112" cy="112" r="90" stroke="#4D4D4D" stroke-width="18"
+                                fill="none" stroke-linecap="round" stroke-dasharray="565" stroke-dashoffset="565" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <p id="bmi" class="text-5xl font-black">--</p>
+                            <p id="category" class="font-bold text-xl mt-2">---</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="bg-white rounded-xl p-4">
+                        <p class="text-gray-500 text-sm">Healthy Weight</p>
+                        <p id="healthy" class="font-bold text-xl">--</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4">
+                        <p class="text-gray-500 text-sm">Water Intake</p>
+                        <p id="water" class="font-bold text-xl">--</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4">
+                        <p class="text-gray-500 text-sm">Calories</p>
+                        <p id="calories" class="font-bold text-xl">--</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4">
+                        <p class="text-gray-500 text-sm">BMI Scale</p>
+                        <div class="h-2 bg-gray-300 rounded mt-3 relative">
+                            <div id="pointer" class="absolute -top-2 w-6 h-6 rounded-full bg-black"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/bmi.js"></script>
 </body>
-<script src="../scripts/bmi.js"></script>
 
 </html>
