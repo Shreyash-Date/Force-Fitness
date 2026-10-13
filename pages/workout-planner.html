@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Planner — Force Fitness</title>
+    <meta name="description"
+        content="Plan your weekly fitness schedule, explore exercise routines, and track training sessions with Force Fitness.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="../src/output.css" rel="stylesheet">
+    <style>
+        #app-container {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex flex-col font-sans antialiased text-gray-900">
+
+    <!-- Top Navigation Section (Clean App Header) -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-8 py-3">
+            
+            <!-- Logo -->
+            <a href="../index.html" class="flex flex-col leading-[1.1] font-black md:font-semibold font-['Impact','Haettenschweiler','Arial_Narrow_Bold',sans-serif]" title="Force Fitness Home">
+                <span class="text-[2rem] tracking-[2px] text-black">Force</span>
+                <span class="text-[1.4rem] tracking-[3px] text-gray-700 opacity-80">Fitness</span>
+            </a>
+
+            <!-- Right Action: Clean Back Link -->
+            <div class="flex items-center gap-3">
+                <a href="../index.html"
+                    class="px-5 py-2 rounded-full border border-gray-300 font-bold text-sm text-gray-700 hover:bg-black hover:text-white hover:border-black transition duration-200">
+                    ← Back to Home
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Workout Planner App Shell -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Header / Page Title Banner -->
+        <div id="app-container" class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100">
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-gray-200">
+                <div>
+                    <span class="inline-flex px-4 py-1.5 bg-black text-white rounded-full font-semibold text-xs mb-3">
+                        Force Fitness Studio
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl font-black text-dark tracking-tight">
+                        Workout <span class="underline">Planner</span>
+                    </h1>
+                    <p class="text-gray-600 text-base sm:text-lg mt-2 max-w-2xl leading-relaxed">
+                        Structure your weekly splits, explore the exercise library, and track your workout sessions all in one place.
+                    </p>
+                </div>
+
+                <!-- Phase Pill Indicator -->
+                <div class="flex items-center gap-3 self-start md:self-auto">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-cream text-dark border border-gray-300 rounded-full font-bold text-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                        Phase 1: UI Foundation
+                    </span>
+                </div>
+            </div>
+
+            <!-- Overview Feature Cards (Matches landing page card design) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-cream rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
+                            7-Day Schedule
+                        </h2>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                            Organize Monday through Sunday routines with customizable splits and rest days.
+                        </p>
+                    </div>
+                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 3 Engine
+                    </span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-cream rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
+                            Exercise Library
+                        </h2>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                            Search and filter 40+ exercises by muscle group, difficulty, and equipment.
+                        </p>
+                    </div>
+                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 2 Catalog
+                    </span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-cream rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
+                            Active Workout
+                        </h2>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                            Execute sessions with live set check-offs, weights, and rest countdown timers.
+                        </p>
+                    </div>
+                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 6 Mode
+                    </span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-cream rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
+                            Progress &amp; Stats
+                        </h2>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                            Review completion streaks, training volume, and saved history logs.
+                        </p>
+                    </div>
+                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 7 Analytics
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Section / Tab Switcher (Force Fitness Pill Bar) -->
+        <div class="space-y-6">
+            
+            <div class="flex justify-center">
+                <div role="tablist" aria-label="Workout Planner Sections"
+                    class="bg-gray-200 p-1.5 rounded-full inline-flex flex-wrap gap-1 shadow-inner max-w-full overflow-x-auto">
+                    
+                    <button role="tab" id="tab-schedule" aria-controls="view-schedule" aria-selected="true" tabindex="0"
+                        class="bg-black text-white shadow rounded-full px-5 py-2.5 text-sm font-bold transition hover:scale-105 active:scale-95 cursor-pointer">
+                        Weekly Schedule
+                    </button>
+
+                    <button role="tab" id="tab-library" aria-controls="view-library" aria-selected="false" tabindex="-1"
+                        class="text-gray-700 hover:bg-gray-200 rounded-full px-5 py-2.5 text-sm font-bold transition hover:scale-105 active:scale-95 cursor-pointer">
+                        Exercise Library
+                    </button>
+
+                    <button role="tab" id="tab-tracker" aria-controls="view-tracker" aria-selected="false" tabindex="-1"
+                        class="text-gray-700 hover:bg-gray-200 rounded-full px-5 py-2.5 text-sm font-bold transition hover:scale-105 active:scale-95 cursor-pointer">
+                        Active Workout
+                    </button>
+
+                    <button role="tab" id="tab-analytics" aria-controls="view-analytics" aria-selected="false" tabindex="-1"
+                        class="text-gray-700 hover:bg-gray-200 rounded-full px-5 py-2.5 text-sm font-bold transition hover:scale-105 active:scale-95 cursor-pointer">
+                        Progress &amp; Analytics
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- Tab Panels with Force Fitness UI -->
+            <div>
+                
+                <!-- Tab Panel 1: Weekly Schedule (Active) -->
+                <div role="tabpanel" id="view-schedule" aria-labelledby="tab-schedule" class="space-y-6">
+                    
+                    <!-- Week Wireframe Grid (Mon - Sun) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 xl:gap-4">
+                        
+                        <!-- Mon -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Monday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 1</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Tue -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Tuesday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 2</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Wed -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Wednesday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 3</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Thu -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Thursday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 4</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Fri -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Friday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 5</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Sat -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Saturday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 6</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                        <!-- Sun -->
+                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
+                            <div class="flex items-center justify-between gap-1 font-black text-dark">
+                                <span class="text-sm xl:text-base">Sunday</span>
+                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 7</span>
+                            </div>
+                            <p class="text-gray-500 text-xs my-2">No routine set</p>
+                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Informative Empty State Card (Matches BMI app card style) -->
+                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
+                        <div class="max-w-md mx-auto space-y-4">
+                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
+                                📅
+                            </div>
+                            <h2 class="text-2xl font-black text-dark">
+                                7-Day Schedule Architecture
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                The interactive 7-day schedule grid, workout day assignments, and rest-day controls will be implemented in Phase 3.
+                            </p>
+                            <div class="pt-2">
+                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
+                                    Planned for Phase 3
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab Panel 2: Exercise Library (Hidden by default) -->
+                <div role="tabpanel" id="view-library" aria-labelledby="tab-library" class="hidden space-y-6" aria-hidden="true">
+                    
+                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
+                        <div class="max-w-md mx-auto space-y-4">
+                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
+                                🏋️
+                            </div>
+                            <h2 class="text-2xl font-black text-dark">
+                                Exercise Library Database
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                The searchable exercise catalog with 40+ movements, muscle group filters, difficulty badges, and form guides will be integrated in Phase 2.
+                            </p>
+                            <div class="pt-2">
+                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
+                                    Planned for Phase 2
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab Panel 3: Active Workout (Hidden by default) -->
+                <div role="tabpanel" id="view-tracker" aria-labelledby="tab-tracker" class="hidden space-y-6" aria-hidden="true">
+                    
+                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
+                        <div class="max-w-md mx-auto space-y-4">
+                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
+                                ⏱️
+                            </div>
+                            <h2 class="text-2xl font-black text-dark">
+                                Active Workout Mode &amp; Rest Timer
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                Live workout execution with set tracking, weight/reps checklists, rest countdown timer, and sound alerts will be built in Phase 6.
+                            </p>
+                            <div class="pt-2">
+                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
+                                    Planned for Phase 6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab Panel 4: Progress & Analytics (Hidden by default) -->
+                <div role="tabpanel" id="view-analytics" aria-labelledby="tab-analytics" class="hidden space-y-6" aria-hidden="true">
+                    
+                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
+                        <div class="max-w-md mx-auto space-y-4">
+                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
+                                📊
+                            </div>
+                            <h2 class="text-2xl font-black text-dark">
+                                Training Progress &amp; History Logs
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                Streak tracking, weekly volume graphs, workout history logs, and local storage data backup/export will be implemented in Phase 7.
+                            </p>
+                            <div class="pt-2">
+                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
+                                    Planned for Phase 7
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer (Matches Force Fitness landing page footer) -->
+    <footer class="bg-dark text-white pt-12 pb-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex flex-col leading-none text-center md:text-left">
+                <span class="text-3xl font-black tracking-tight">Force</span>
+                <span class="text-xl font-bold tracking-wide text-gray-300">Fitness</span>
+                <p class="mt-2 text-gray-400 text-sm">Train smarter. Live stronger.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+                <a href="../index.html#home" class="hover:text-white transition">Home</a>
+                <a href="../index.html#features" class="hover:text-white transition">Features</a>
+                <a href="../index.html#pricing" class="hover:text-white transition">Pricing</a>
+                <a href="bmi.html" class="hover:text-white transition">BMI Calculator</a>
+                <a href="workout-planner.html" class="text-white font-bold transition">Workout Planner</a>
+            </div>
+
+            <p class="text-gray-500 text-xs text-center">
+                © 2026 Force Fitness. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Coordinator Module Script -->
+    <script type="module" src="../scripts/workout/app.js"></script>
+</body>
+
+</html>

@@ -29,12 +29,13 @@
                 <span class="text-[1.4rem] tracking-[3px] opacity-80">Fitness</span>
             </div>
             <nav class="nav-links-container" aria-label="Main navigation">
-                <ul class="hidden md:flex space-x-4 text-lg">
+                <ul class="hidden md:flex space-x-4 text-lg items-center">
                     <li><a href="#home" class="hover:text-gray-dark">Home</a></li>
                     <li><a href="#features" class="hover:text-gray-dark">Features</a></li>
                     <li><a href="#trainers" class="hover:text-gray-dark">Trainers</a></li>
                     <li><a href="#pricing" class="hover:text-gray-dark">Pricing</a></li>
                     <li><a href="#contact" class="hover:text-gray-dark">Contact</a></li>
+                    <li><a href="pages/workout-planner.html" class="hover:text-gray-dark font-semibold text-emerald-600">Planner</a></li>
                 </ul>
             </nav>
             <button
@@ -69,6 +70,12 @@
                 <li class="w-full border-b flex items-center justify-center" role="none">
                     <a href="#contact" class="w-full text-center py-3" role="menuitem">Contact</a>
                 </li>
+                <li class="w-full border-b flex items-center justify-center" role="none">
+                    <a href="pages/workout-planner.html" class="w-full text-center py-3 text-emerald-600 font-bold" role="menuitem">Workout Planner</a>
+                </li>
+                <li class="w-full border-b flex items-center justify-center" role="none">
+                    <a href="pages/bmi.html" class="w-full text-center py-3" role="menuitem">BMI Calculator</a>
+                </li>
             </ul>
         </div>
     </section>
@@ -83,13 +90,17 @@
                     Train with certified coaches, modern equipment, and personalized workout plans.
                 </p>
             </div>
-            <div class="flex space-x-6 mt-7 md:mt-8">
+            <div class="flex flex-wrap justify-center gap-4 mt-7 md:mt-8">
                 <a href="#pricing"
-                    class="bg-off-white md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-teal-400 hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 inline-block">
+                    class="bg-off-white px-8 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-teal-400 hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 inline-block">
                     View Plan
                 </a>
+                <a href="pages/workout-planner.html"
+                    class="bg-black px-8 py-3 text-white font-bold rounded-4xl border border-black cursor-pointer hover:bg-gray-800 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 inline-block">
+                    Workout Planner
+                </a>
                 <a href="pages/bmi.html" target="_blank"
-                    class="bg-off-white md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-gray-dark hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 inline-block">
+                    class="bg-off-white px-8 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-gray-dark hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 inline-block">
                     BMI Calc.
                 </a>
             </div>
@@ -608,6 +619,18 @@
                     <li>
                         <a href="#contact" class="hover:text-white transition">
                             Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="pages/workout-planner.html" class="hover:text-white text-emerald-400 transition">
+                            Workout Planner
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="pages/bmi.html" class="hover:text-white transition">
+                            BMI Calculator
                         </a>
                     </li>
 
