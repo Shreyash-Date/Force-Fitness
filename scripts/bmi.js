@@ -16,15 +16,23 @@ const error = $("#error");
 
 const circumference = 565;
 
+let animationTimer = null;
+
 function animateValue(element, target) {
+    if (animationTimer) {
+        clearInterval(animationTimer);
+        animationTimer = null;
+    }
+
     let current = 0;
 
-    const timer = setInterval(() => {
+    animationTimer = setInterval(() => {
         current += target / 40;
 
         if (current >= target) {
             current = target;
-            clearInterval(timer);
+            clearInterval(animationTimer);
+            animationTimer = null;
         }
 
         element.textContent = current.toFixed(1);

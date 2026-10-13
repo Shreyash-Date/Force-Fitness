@@ -2,9 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">  
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Force Fitness</title>
+    <meta name="description"
+        content="Transform your body and life at Force Fitness. Train with certified coaches, modern equipment, and personalized workout plans in Mumbai.">
+    <meta property="og:title" content="Force Fitness — Transform Your Body, Transform Your Life">
+    <meta property="og:description"
+        content="Train with certified coaches, modern equipment, and personalized workout plans at Force Fitness, Mumbai.">
+    <meta property="og:type" content="website">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link href="src/output.css" rel="stylesheet">
 </head>
 
@@ -16,17 +28,17 @@
                 <span class="text-[2rem] tracking-[2px]">Force</span>
                 <span class="text-[1.4rem] tracking-[3px] opacity-80">Fitness</span>
             </div>
-            <nav class="nav-links-container">
-                <ul class="hidden mg:block md:flex space-x-4 text-lg ">
-                    <li><a href="#home" class="hover:text-[#4D4D4D]">Home</a></li>
-                    <li><a href="#features" class="hover:text-[#4D4D4D]">Features</a></li>
-                    <li><a href="#trainers" class="hover:text-[#4D4D4D]">Trainers</a></li>
-                    <li><a href="#pricing" class="hover:text-[#4D4D4D]">Pricing</a></li>
-                    <li><a href="#contact" class="hover:text-[#4D4D4D]">Contact</a></li>
+            <nav class="nav-links-container" aria-label="Main navigation">
+                <ul class="hidden md:flex space-x-4 text-lg">
+                    <li><a href="#home" class="hover:text-gray-dark">Home</a></li>
+                    <li><a href="#features" class="hover:text-gray-dark">Features</a></li>
+                    <li><a href="#trainers" class="hover:text-gray-dark">Trainers</a></li>
+                    <li><a href="#pricing" class="hover:text-gray-dark">Pricing</a></li>
+                    <li><a href="#contact" class="hover:text-gray-dark">Contact</a></li>
                 </ul>
             </nav>
             <button
-                class="bg-[#4D4D4D] hidden md:block px-6 py-2 text-white font-bold rounded-4xl cursor-pointer hover:bg-white border hover:text-black transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
+                class="bg-gray-dark hidden md:block px-6 py-2 text-white font-bold rounded-4xl cursor-pointer hover:bg-white border hover:text-black transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
                 JoinNow
             </button>
             <!-- Hamburger -->
@@ -38,9 +50,10 @@
             </button>
 
             <!-- Mobile Menu -->
-            <ul id="mobileMenu" class="md:hidden flex flex-col items-center gap-5 absolute top-full left-0 w-full bg-white text-xl font-black shadow-lg z-40 py-4
-           transition-all duration-300 ease-in-out -translate-y-3 opacity-0 invisible h-90" role="menu"
-                aria-hidden="true">
+            <ul id="mobileMenu" aria-label="Mobile navigation"
+                class="md:hidden flex flex-col items-center gap-5 absolute top-full left-0 w-full bg-white text-xl font-black shadow-lg z-40 py-4
+               transition-all duration-300 ease-in-out -translate-y-3 opacity-0 invisible h-90"
+                role="menu" aria-hidden="true">
                 <li class="w-full border-b flex items-center justify-center" role="none">
                     <a href="#home" class="w-full text-center py-3" role="menuitem">Home</a>
                 </li>
@@ -62,32 +75,28 @@
 
     <section class="hero" id="hero">
         <div class="flex flex-col justify-center items-center h-[80vh]">
-            <span class="font-black font-fantasy text-[2.1rem] md:text-[4rem] leading-none">
-                <h1>Transform Your Body,</h1>
-                <h1>Transform Your Life</h1>
-            </span>
-            <span class="w-[80%] md:w-fit mt-5">
+            <h1 class="font-black text-[2.1rem] md:text-[4rem] leading-none text-center">
+                Transform Your Body,<br>Transform Your Life
+            </h1>
+            <div class="w-[80%] md:w-fit mt-5">
                 <p class="text-lg font-light">
-                    Train with certified coaches, modern euqipment, and personalized workout plans.
+                    Train with certified coaches, modern equipment, and personalized workout plans.
                 </p>
-            </span>
-            <span class="flex space-x-6 mt-7 md:mt-8">
-                <!-- <button class="bg-[#4D4D4D] md:block px-6 py-2 text-white font-bold rounded-4xl cursor-pointer">Join Now</button> -->
-                <button
-                    class="bg-[#fffdfd] md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-teal-400 hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
-                    <a href="#pricing">View Plan</a>
-                </button>
-                <a href="pages/bmi.html" target="_blank">
-                    <button
-                        class="bg-[#fffdfd] md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-[#4D4D4D] hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
-                        BMI Calc.
-                    </button>
+            </div>
+            <div class="flex space-x-6 mt-7 md:mt-8">
+                <a href="#pricing"
+                    class="bg-off-white md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-teal-400 hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 inline-block">
+                    View Plan
                 </a>
-            </span>
+                <a href="pages/bmi.html" target="_blank"
+                    class="bg-off-white md:block px-9 py-3 text-black font-bold rounded-4xl border cursor-pointer hover:bg-gray-dark hover:text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 inline-block">
+                    BMI Calc.
+                </a>
+            </div>
         </div>
     </section>
 
-    <section class="bg-[#1a1a1a] py-20 px-6" id="features">
+    <section class="bg-dark py-20 px-6" id="features">
 
         <div class="max-w-7xl mx-auto">
 
@@ -106,7 +115,7 @@
 
                 <!-- Card 1 -->
                 <div
-                    class="bg-[#f4f4f2] rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
+                    class="bg-cream rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
                     <div>
                         <h2 class="text-2xl font-black border-b-2 border-gray-300 pb-3">
                             Modern Equipment
@@ -125,7 +134,7 @@
 
                 <!-- Card 2 -->
                 <div
-                    class="bg-[#f4f4f2] rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
+                    class="bg-cream rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
                     <div>
                         <h2 class="text-2xl font-black border-b-2 border-gray-300 pb-3">
                             Expert Trainers
@@ -145,7 +154,7 @@
 
                 <!-- Card 3 -->
                 <div
-                    class="bg-[#f4f4f2] rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
+                    class="bg-cream rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
                     <div>
                         <h2 class="text-2xl font-black border-b-2 border-gray-300 pb-3">
                             Flexible Schedule
@@ -164,7 +173,7 @@
 
                 <!-- Card 4 -->
                 <div
-                    class="bg-[#f4f4f2] rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
+                    class="bg-cream rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
                     <div>
                         <h2 class="text-2xl font-black border-b-2 border-gray-300 pb-3">
                             Personal Training
@@ -183,7 +192,7 @@
 
                 <!-- Card 5 -->
                 <div
-                    class="bg-[#f4f4f2] rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
+                    class="bg-cream rounded-2xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-70">
                     <div>
                         <h2 class="text-2xl font-black border-b-2 border-gray-300 pb-3">
                             Nutrition Support
@@ -203,13 +212,13 @@
         </div>
     </section>
 
-    <section class="bg-[#f4f4f2] py-20 px-6" id="trainers">
+    <section class="bg-cream py-20 px-6" id="trainers">
 
         <!-- Heading -->
         <div class="text-center mb-14">
-            <h1 class="text-4xl md:text-5xl font-black text-[#1a1a1a]">
+            <h2 class="text-4xl md:text-5xl font-black text-dark">
                 Meet Our Trainers
-            </h1>
+            </h2>
 
             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
                 Meet our certified professionals dedicated to helping you achieve your fitness goals.
@@ -223,15 +232,16 @@
             <div
                 class="bg-white rounded-3xl shadow-lg p-8 text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
 
-                <img src="Images/profile picture.png" alt="Arjun Sharma"
-                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black">
+                <img src="images/profile-picture.png" alt="Arjun Sharma"
+                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black" width="176" height="176"
+                    loading="lazy">
 
                 <h2 class="mt-6 text-2xl font-black">
                     Arjun Sharma
                 </h2>
 
                 <p class="mt-2 text-gray-700 font-semibold">
-                    Strength Training & Muscle Building
+                    Strength Training &amp; Muscle Building
                 </p>
 
                 <p class="mt-4 text-gray-600 leading-relaxed">
@@ -244,15 +254,16 @@
             <div
                 class="bg-white rounded-3xl shadow-lg p-8 text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
 
-                <img src="Images/profile picture.png" alt="Rahul Verma"
-                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black">
+                <img src="images/profile-picture.png" alt="Rahul Verma"
+                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black" width="176" height="176"
+                    loading="lazy">
 
                 <h2 class="mt-6 text-2xl font-black">
                     Rahul Verma
                 </h2>
 
                 <p class="mt-2 text-gray-700 font-semibold">
-                    Weight Loss & Functional Fitness
+                    Weight Loss &amp; Functional Fitness
                 </p>
 
                 <p class="mt-4 text-gray-600 leading-relaxed">
@@ -265,15 +276,16 @@
             <div
                 class="bg-white rounded-3xl shadow-lg p-8 text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
 
-                <img src="Images/profile picture.png" alt="Rohan Mehta"
-                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black">
+                <img src="images/profile-picture.png" alt="Rohan Mehta"
+                    class="w-44 h-44 rounded-full object-cover mx-auto border-4 border-black" width="176" height="176"
+                    loading="lazy">
 
                 <h2 class="mt-6 text-2xl font-black">
                     Rohan Mehta
                 </h2>
 
                 <p class="mt-2 text-gray-700 font-semibold">
-                    HIIT & Athletic Performance
+                    HIIT &amp; Athletic Performance
                 </p>
 
                 <p class="mt-4 text-gray-600 leading-relaxed">
@@ -283,13 +295,13 @@
         </div>
     </section>
 
-    <section class="bg-[#1a1a1a] py-20 px-6" id="pricing">
+    <section class="bg-dark py-20 px-6" id="pricing">
 
         <!-- Heading -->
         <div class="text-center mb-14">
-            <h1 class="text-4xl md:text-5xl font-black text-white">
+            <h2 class="text-4xl md:text-5xl font-black text-white">
                 Membership Plans
-            </h1>
+            </h2>
 
             <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
                 Choose the membership that fits your fitness goals and start transforming your lifestyle today.
@@ -301,7 +313,7 @@
 
             <!-- Basic -->
             <div
-                class="bg-[#f4f4f2] rounded-3xl p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col">
+                class="bg-cream rounded-3xl p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col">
 
                 <h2 class="text-3xl font-black">Basic Plan</h2>
 
@@ -366,7 +378,7 @@
 
             <!-- Elite -->
             <div
-                class="bg-[#f4f4f2] rounded-3xl p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col">
+                class="bg-cream rounded-3xl p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col">
 
                 <h2 class="text-3xl font-black">Elite Plan</h2>
 
@@ -399,15 +411,15 @@
 
     </section>
 
-    <section class="bg-[#f4f4f2] py-20 px-6" id="contact">
+    <section class="bg-cream py-20 px-6" id="contact">
 
         <div class="max-w-7xl mx-auto">
 
             <!-- Heading -->
             <div class="text-center mb-14">
-                <h1 class="text-4xl md:text-5xl font-black text-[#1a1a1a]">
+                <h2 class="text-4xl md:text-5xl font-black text-dark">
                     Get In Touch
-                </h1>
+                </h2>
 
                 <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
                     Have questions about memberships or classes? Reach out—we're here to help.
@@ -480,7 +492,7 @@
                             Name
                         </label>
 
-                        <input type="text" id="name" name="name" placeholder="Your full name"
+                        <input type="text" id="name" name="name" placeholder="Your full name" required
                             class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black">
 
                         <span id="nameError" class="text-red-500 text-sm"></span>
@@ -491,7 +503,7 @@
                             Email
                         </label>
 
-                        <input type="email" id="email" name="email" placeholder="you@example.com"
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required
                             class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black">
 
                         <span id="emailError" class="text-red-500 text-sm"></span>
@@ -502,7 +514,7 @@
                             Phone
                         </label>
 
-                        <input type="tel" id="phone" name="phone" placeholder="Your phone number"
+                        <input type="tel" id="phone" name="phone" placeholder="Your phone number" required
                             class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black">
 
                         <span id="phoneError" class="text-red-500 text-sm"></span>
@@ -514,6 +526,7 @@
                         </label>
 
                         <textarea id="message" name="message" rows="5" placeholder="Tell us what you're looking for"
+                            required
                             class="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-black"></textarea>
 
                         <span id="messageError" class="text-red-500 text-sm"></span>
@@ -536,7 +549,7 @@
 
     </section>
 
-    <footer class="bg-[#1a1a1a] text-white pt-16 pb-8">
+    <footer class="bg-dark text-white pt-16 pb-8">
 
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
@@ -638,17 +651,17 @@
 
                 <div class="flex gap-4">
 
-                    <a href="#"
+                    <a href="#" aria-label="Follow us on Instagram"
                         class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
                         IG
                     </a>
 
-                    <a href="#"
+                    <a href="#" aria-label="Follow us on Facebook"
                         class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
                         FB
                     </a>
 
-                    <a href="#"
+                    <a href="#" aria-label="Follow us on YouTube"
                         class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
                         YT
                     </a>
@@ -670,7 +683,8 @@
 
     </footer>
 
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/contact.js"></script>
 </body>
-<script src="scripts/menu.js"></script>
 
 </html>
