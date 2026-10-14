@@ -6,6 +6,7 @@
 
 import { getDay, updateFullDayRoutine } from './storage.js';
 import { EXERCISES, MUSCLE_GROUPS, EQUIPMENT_TYPES } from './exercises-data.js';
+import { escapeHtml } from './utils.js';
 
 let activeDayId = null;
 let isEditorActive = false;
@@ -701,7 +702,7 @@ function renderPickerModalContent(modal) {
                 equipment: exercise.equipment,
                 sets: exercise.defaultSets || 3,
                 reps: exercise.defaultReps || '10-12',
-                duration: exercise.defaultReps && exercise.defaultReps.includes('s') ? exercise.defaultReps : '',
+                duration: exercise.defaultReps && /^\d[\d\s\-]*s$/i.test(exercise.defaultReps.trim()) ? exercise.defaultReps : '',
                 rest: '90s',
                 notes: exercise.description || ''
             });
@@ -719,11 +720,3 @@ function renderPickerModalContent(modal) {
     });
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}

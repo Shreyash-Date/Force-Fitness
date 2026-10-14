@@ -263,15 +263,7 @@ export function toggleRestDay(dayId) {
     const day = schedule.find(d => d.dayId === dayId);
     if (day) {
         day.isRest = !day.isRest;
-        if (day.isRest) {
-            if (!day.routineName || day.routineName.includes('Workout') || day.routineName.includes('Push') || day.routineName.includes('Pull')) {
-                day.routineName = 'Rest & Recovery';
-            }
-        } else {
-            if (!day.routineName || day.routineName.includes('Rest')) {
-                day.routineName = 'Custom Routine';
-            }
-        }
+        day.routineName = day.isRest ? 'Rest & Recovery' : 'Custom Routine';
         saveSchedule(schedule);
     }
     return schedule;
@@ -289,13 +281,13 @@ export function addExerciseToDay(dayId, exerciseData) {
             day.exercises = [];
         }
         day.exercises.push({
-            id: exerciseData.id || `custom-${Date.now()}`,
+            id: exerciseData.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
             name: exerciseData.name || 'Unnamed Exercise',
             muscleGroup: exerciseData.muscleGroup || 'General',
             equipment: exerciseData.equipment || 'Bodyweight',
             sets: exerciseData.defaultSets || 3,
             reps: exerciseData.defaultReps || '10-12',
-            duration: exerciseData.duration || (exerciseData.defaultReps && exerciseData.defaultReps.includes('s') ? exerciseData.defaultReps : ''),
+            duration: exerciseData.duration || (exerciseData.defaultReps && /^\d[\d\s\-]*s$/i.test(exerciseData.defaultReps.trim()) ? exerciseData.defaultReps : ''),
             rest: exerciseData.rest || '90s',
             notes: exerciseData.notes || exerciseData.description || ''
         });
@@ -339,8 +331,8 @@ export function updateFullDayRoutine(dayId, { routineName, isRest, exercises }) 
         day.isRest = isRest;
     }
     if (Array.isArray(exercises)) {
-        day.exercises = exercises.map(ex => ({
-            id: ex.id || `custom-${Date.now()}`,
+        day.exercises = exercises.map((ex, idx) => ({
+            id: ex.id || `custom-${Date.now()}-${idx}`,
             name: (ex.name || 'Custom Exercise').trim(),
             muscleGroup: ex.muscleGroup || 'General',
             equipment: ex.equipment || 'Bodyweight',

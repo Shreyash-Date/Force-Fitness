@@ -1,4 +1,7 @@
 {
+  "name": "force-fitness",
+  "version": "1.0.0",
+  "description": "Force Fitness — Gym & fitness website with workout planner, BMI calculator, and more.",
   "scripts": {
     "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
     "build": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --minify",

@@ -5,6 +5,7 @@
 
 import { EXERCISES, MUSCLE_GROUPS, EQUIPMENT_TYPES, DIFFICULTY_LEVELS } from './exercises-data.js';
 import { getSelectedDayId, getDay, addExerciseToDay } from './storage.js';
+import { escapeHtml } from './utils.js';
 
 let currentSearch = '';
 let currentMuscle = 'All';
@@ -17,6 +18,11 @@ export function initLibrary() {
 
     // Listen for schedule day changes to update the button label "+ Add to [Day]"
     window.addEventListener('selected-day-changed', () => {
+        renderLibraryList();
+    });
+
+    // Sync library when schedule data changes (e.g., exercises added/removed from editor)
+    window.addEventListener('schedule-updated', () => {
         renderLibraryList();
     });
 }
@@ -252,7 +258,8 @@ export function renderLibraryList() {
             const exercise = EXERCISES.find(e => e.id === exerciseId);
             if (!exercise) return;
 
-            addExerciseToDay(selectedDayId, exercise);
+            const currentDayId = getSelectedDayId();
+            addExerciseToDay(currentDayId, exercise);
 
             // Button feedback
             const originalText = btn.innerHTML;
@@ -272,11 +279,3 @@ export function renderLibraryList() {
     });
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}

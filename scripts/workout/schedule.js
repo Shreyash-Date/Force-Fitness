@@ -14,7 +14,7 @@ import {
     removeExerciseFromDay
 } from './storage.js';
 import { isEditingActive, startEditing, renderEditorUI, getActiveEditingDayId } from './editor.js';
-import { openGeneratorModal } from './generator.js';
+import { escapeHtml } from './utils.js';
 
 export function initSchedule() {
     renderSchedule();
@@ -28,11 +28,7 @@ export function initSchedule() {
         renderSchedule();
     });
 
-    // Generator trigger button on schedule banner if present
-    const genBtn = document.getElementById('open-plan-generator-btn');
-    if (genBtn) {
-        genBtn.addEventListener('click', openGeneratorModal);
-    }
+
 }
 
 export function renderSchedule() {
@@ -384,11 +380,3 @@ function updateDashboardMetrics(schedule) {
     if (volSub) volSub.textContent = `${totalSets} Total Weekly Sets`;
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}

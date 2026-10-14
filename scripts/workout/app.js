@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Initialize Smart Workout Plan Generator (Phase 3)
     initGenerator();
 
-    // 3. Tab Navigation Setup
+    // 4. Tab Navigation Setup
     const tabButtons = document.querySelectorAll('[role="tab"]');
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
 

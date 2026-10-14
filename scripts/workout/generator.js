@@ -11,6 +11,7 @@
  */
 
 import { EXERCISES } from './exercises-data.js';
+import { escapeHtml } from './utils.js';
 import { replaceSchedule, setSelectedDayId } from './storage.js';
 
 let isGeneratorOpen = false;
@@ -513,8 +514,8 @@ function pickExercisesForMuscles(muscles, allowedPool, count, params) {
                 muscleGroup: pick.muscleGroup,
                 equipment: pick.equipment,
                 sets: params.targetSets,
-                reps: pick.defaultReps && pick.defaultReps.includes('s') ? pick.defaultReps : params.targetReps,
-                duration: pick.defaultReps && pick.defaultReps.includes('s') ? pick.defaultReps : '',
+                reps: pick.defaultReps && /^\d[\d\s\-]*s$/i.test(pick.defaultReps.trim()) ? pick.defaultReps : params.targetReps,
+                duration: pick.defaultReps && /^\d[\d\s\-]*s$/i.test(pick.defaultReps.trim()) ? pick.defaultReps : '',
                 rest: params.targetRest,
                 notes: `${params.goalNote} ${pick.description || ''}`.trim()
             });
@@ -534,8 +535,8 @@ function pickExercisesForMuscles(muscles, allowedPool, count, params) {
                 muscleGroup: pick.muscleGroup,
                 equipment: pick.equipment,
                 sets: params.targetSets,
-                reps: pick.defaultReps && pick.defaultReps.includes('s') ? pick.defaultReps : params.targetReps,
-                duration: pick.defaultReps && pick.defaultReps.includes('s') ? pick.defaultReps : '',
+                reps: pick.defaultReps && /^\d[\d\s\-]*s$/i.test(pick.defaultReps.trim()) ? pick.defaultReps : params.targetReps,
+                duration: pick.defaultReps && /^\d[\d\s\-]*s$/i.test(pick.defaultReps.trim()) ? pick.defaultReps : '',
                 rest: params.targetRest,
                 notes: params.goalNote
             });
@@ -624,11 +625,3 @@ function showGlobalToast(message) {
     }, 4000);
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}

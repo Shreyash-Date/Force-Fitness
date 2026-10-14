@@ -57,6 +57,13 @@ if (contactForm) {
         }
 
         if (isValid) {
+            // Log form data (connect to backend API for production use)
+            console.log('Contact form submitted:', {
+                name: name.value.trim(),
+                email: email.value.trim(),
+                phone: phone.value.trim(),
+                message: message.value.trim()
+            });
             formSuccess.classList.remove('hidden');
             contactForm.reset();
         }

@@ -14,7 +14,7 @@ const progress = $("#progress");
 const pointer = $("#pointer");
 const error = $("#error");
 
-const circumference = 565;
+const circumference = 2 * Math.PI * 90; // ≈ 565.49, matches SVG circle r=90
 
 let animationTimer = null;
 
