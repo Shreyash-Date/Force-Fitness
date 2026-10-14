@@ -5,13 +5,17 @@
 
 import { initSchedule } from './schedule.js';
 import { initLibrary } from './library.js';
+import { initGenerator } from './generator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Functional Schedule Engine (Phase 2)
+    // 1. Initialize Functional Schedule Engine & Editor (Phase 3)
     initSchedule();
 
-    // 2. Initialize Exercise Library Catalog & Filters (Phase 2)
+    // 2. Initialize Exercise Library Catalog & Filters
     initLibrary();
+
+    // 3. Initialize Smart Workout Plan Generator (Phase 3)
+    initGenerator();
 
     // 3. Tab Navigation Setup
     const tabButtons = document.querySelectorAll('[role="tab"]');

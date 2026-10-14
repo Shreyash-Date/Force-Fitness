@@ -20,7 +20,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Chest',
                 equipment: 'Barbell',
                 sets: 4,
-                reps: '8-10'
+                reps: '8-10',
+                duration: '',
+                rest: '90s',
+                notes: 'Retract scapulae and maintain 5-point body contact.'
             },
             {
                 id: 'incline-dumbbell-press',
@@ -28,7 +31,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Chest',
                 equipment: 'Dumbbell',
                 sets: 3,
-                reps: '10-12'
+                reps: '10-12',
+                duration: '',
+                rest: '75s',
+                notes: 'Deep stretch at bottom, squeeze chest at top.'
             },
             {
                 id: 'tricep-rope-pushdown',
@@ -36,7 +42,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Arms',
                 equipment: 'Cable',
                 sets: 3,
-                reps: '12-15'
+                reps: '12-15',
+                duration: '',
+                rest: '60s',
+                notes: 'Flare ropes outward at peak contraction.'
             }
         ]
     },
@@ -53,7 +62,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Back',
                 equipment: 'Bodyweight',
                 sets: 4,
-                reps: '6-10'
+                reps: '6-10',
+                duration: '',
+                rest: '90s',
+                notes: 'Full dead-hang stretch at bottom, drive elbows down.'
             },
             {
                 id: 'barbell-bent-over-row',
@@ -61,7 +73,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Back',
                 equipment: 'Barbell',
                 sets: 4,
-                reps: '8-10'
+                reps: '8-10',
+                duration: '',
+                rest: '90s',
+                notes: 'Hinge at 45 degrees, pull barbell to lower ribcage.'
             },
             {
                 id: 'barbell-bicep-curl',
@@ -69,7 +84,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Arms',
                 equipment: 'Barbell',
                 sets: 3,
-                reps: '10-12'
+                reps: '10-12',
+                duration: '',
+                rest: '60s',
+                notes: 'Pin elbows to ribs and control the eccentric phase.'
             }
         ]
     },
@@ -94,7 +112,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Legs',
                 equipment: 'Barbell',
                 sets: 4,
-                reps: '6-8'
+                reps: '6-8',
+                duration: '',
+                rest: '120s',
+                notes: 'Hit parallel depth, push knees out in line with toes.'
             },
             {
                 id: 'romanian-deadlift',
@@ -102,7 +123,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Legs',
                 equipment: 'Barbell',
                 sets: 3,
-                reps: '8-10'
+                reps: '8-10',
+                duration: '',
+                rest: '90s',
+                notes: 'Hinge hips backwards, feel stretch in hamstrings.'
             },
             {
                 id: 'hanging-leg-raise',
@@ -110,7 +134,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Core',
                 equipment: 'Bodyweight',
                 sets: 3,
-                reps: '12-15'
+                reps: '12-15',
+                duration: '',
+                rest: '60s',
+                notes: 'Avoid swinging; initiate pull with abdominal brace.'
             }
         ]
     },
@@ -127,7 +154,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Shoulders',
                 equipment: 'Barbell',
                 sets: 4,
-                reps: '6-8'
+                reps: '6-8',
+                duration: '',
+                rest: '90s',
+                notes: 'Brace glutes and core; press directly overhead.'
             },
             {
                 id: 'dumbbell-lateral-raise',
@@ -135,7 +165,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Shoulders',
                 equipment: 'Dumbbell',
                 sets: 4,
-                reps: '12-15'
+                reps: '12-15',
+                duration: '',
+                rest: '60s',
+                notes: 'Lead with elbows with slight forward torso lean.'
             },
             {
                 id: 'hammer-curl',
@@ -143,7 +176,10 @@ export const DEFAULT_SCHEDULE = [
                 muscleGroup: 'Arms',
                 equipment: 'Dumbbell',
                 sets: 3,
-                reps: '10-12'
+                reps: '10-12',
+                duration: '',
+                rest: '60s',
+                notes: 'Neutral grip emphasizing brachialis and forearm.'
             }
         ]
     },
@@ -174,6 +210,16 @@ export function getSchedule() {
         }
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length === 7) {
+            // Ensure any existing items have fallback values for new Phase 3 fields
+            parsed.forEach(day => {
+                if (Array.isArray(day.exercises)) {
+                    day.exercises.forEach(ex => {
+                        if (ex.duration === undefined) ex.duration = '';
+                        if (ex.rest === undefined) ex.rest = '90s';
+                        if (ex.notes === undefined) ex.notes = '';
+                    });
+                }
+            });
             return parsed;
         }
     } catch (e) {
@@ -239,13 +285,19 @@ export function addExerciseToDay(dayId, exerciseData) {
             day.isRest = false;
             day.routineName = 'Custom Routine';
         }
+        if (!Array.isArray(day.exercises)) {
+            day.exercises = [];
+        }
         day.exercises.push({
-            id: exerciseData.id,
-            name: exerciseData.name,
-            muscleGroup: exerciseData.muscleGroup,
-            equipment: exerciseData.equipment,
+            id: exerciseData.id || `custom-${Date.now()}`,
+            name: exerciseData.name || 'Unnamed Exercise',
+            muscleGroup: exerciseData.muscleGroup || 'General',
+            equipment: exerciseData.equipment || 'Bodyweight',
             sets: exerciseData.defaultSets || 3,
-            reps: exerciseData.defaultReps || '10-12'
+            reps: exerciseData.defaultReps || '10-12',
+            duration: exerciseData.duration || (exerciseData.defaultReps && exerciseData.defaultReps.includes('s') ? exerciseData.defaultReps : ''),
+            rest: exerciseData.rest || '90s',
+            notes: exerciseData.notes || exerciseData.description || ''
         });
         saveSchedule(schedule);
     }
@@ -260,4 +312,57 @@ export function removeExerciseFromDay(dayId, exerciseIndex) {
         saveSchedule(schedule);
     }
     return schedule;
+}
+
+export function reorderDayExercise(dayId, fromIndex, toIndex) {
+    const schedule = getSchedule();
+    const day = schedule.find(d => d.dayId === dayId);
+    if (!day || !Array.isArray(day.exercises)) return schedule;
+    if (fromIndex < 0 || fromIndex >= day.exercises.length || toIndex < 0 || toIndex >= day.exercises.length) {
+        return schedule;
+    }
+    const [movedItem] = day.exercises.splice(fromIndex, 1);
+    day.exercises.splice(toIndex, 0, movedItem);
+    saveSchedule(schedule);
+    return schedule;
+}
+
+export function updateFullDayRoutine(dayId, { routineName, isRest, exercises }) {
+    const schedule = getSchedule();
+    const day = schedule.find(d => d.dayId === dayId);
+    if (!day) return schedule;
+
+    if (typeof routineName === 'string') {
+        day.routineName = routineName.trim() || (isRest ? 'Rest Day' : 'Workout Routine');
+    }
+    if (typeof isRest === 'boolean') {
+        day.isRest = isRest;
+    }
+    if (Array.isArray(exercises)) {
+        day.exercises = exercises.map(ex => ({
+            id: ex.id || `custom-${Date.now()}`,
+            name: (ex.name || 'Custom Exercise').trim(),
+            muscleGroup: ex.muscleGroup || 'General',
+            equipment: ex.equipment || 'Bodyweight',
+            sets: Math.max(1, Math.min(10, parseInt(ex.sets, 10) || 3)),
+            reps: String(ex.reps || '10-12').trim(),
+            duration: String(ex.duration || '').trim(),
+            rest: String(ex.rest || '90s').trim(),
+            notes: String(ex.notes || '').trim()
+        }));
+    }
+    saveSchedule(schedule);
+    return schedule;
+}
+
+export function replaceSchedule(newSchedule) {
+    if (Array.isArray(newSchedule) && newSchedule.length === 7) {
+        saveSchedule(newSchedule);
+    }
+    return getSchedule();
+}
+
+export function resetScheduleToDefault() {
+    saveSchedule(DEFAULT_SCHEDULE);
+    return JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
 }

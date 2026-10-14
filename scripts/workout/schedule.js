@@ -1,17 +1,38 @@
 /**
- * Force Fitness — 7-Day Schedule Controller (Phase 2)
- * Manages 7-day calendar, day selection, rest-day toggling, routine renaming, and exercise removal.
+ * Force Fitness — 7-Day Schedule Controller (Phase 3)
+ * Manages 7-day calendar, day selection, rest-day toggling, routine display,
+ * Workout Editor invocation, and smart Plan Generator synchronization.
  */
 
-import { getSchedule, getSelectedDayId, setSelectedDayId, getDay, updateDayRoutineName, toggleRestDay, removeExerciseFromDay } from './storage.js';
+import {
+    getSchedule,
+    getSelectedDayId,
+    setSelectedDayId,
+    getDay,
+    updateDayRoutineName,
+    toggleRestDay,
+    removeExerciseFromDay
+} from './storage.js';
+import { isEditingActive, startEditing, renderEditorUI, getActiveEditingDayId } from './editor.js';
+import { openGeneratorModal } from './generator.js';
 
 export function initSchedule() {
     renderSchedule();
 
-    // Listen for storage updates triggered elsewhere (e.g. adding from library)
+    // Listen for storage and schedule events
     window.addEventListener('schedule-updated', () => {
         renderSchedule();
     });
+
+    window.addEventListener('editor-closed', () => {
+        renderSchedule();
+    });
+
+    // Generator trigger button on schedule banner if present
+    const genBtn = document.getElementById('open-plan-generator-btn');
+    if (genBtn) {
+        genBtn.addEventListener('click', openGeneratorModal);
+    }
 }
 
 export function renderSchedule() {
@@ -19,7 +40,14 @@ export function renderSchedule() {
     const selectedDayId = getSelectedDayId();
 
     renderWeekGrid(schedule, selectedDayId);
-    renderDayDetailPanel(selectedDayId);
+    
+    // If editor is currently active on the selected day, keep editor rendered
+    if (isEditingActive() && getActiveEditingDayId() === selectedDayId) {
+        renderEditorUI();
+    } else {
+        renderDayDetailPanel(selectedDayId);
+    }
+
     updateDashboardMetrics(schedule);
 }
 
@@ -57,7 +85,7 @@ function renderWeekGrid(schedule, selectedDayId) {
                     <!-- Exercise Preview or Rest Message -->
                     ${day.isRest ? `
                         <span class="inline-flex px-2 py-0.5 rounded bg-gray-100 text-[10px] font-semibold text-gray-500">
-                            🛌 Rest &amp; Recovery
+                            Rest &amp; Recovery
                         </span>
                     ` : `
                         <p class="text-[11px] text-gray-500 line-clamp-2">
@@ -123,15 +151,22 @@ function renderDayDetailPanel(dayId) {
                     </h2>
                 </div>
 
-                <!-- Rest Day Toggle Action -->
-                <div class="flex items-center gap-3">
+                <!-- Action Controls: Edit Workout, Toggle Rest Day -->
+                <div class="flex items-center flex-wrap gap-2.5">
+                    ${!day.isRest ? `
+                        <button id="open-editor-btn" type="button"
+                            class="px-5 py-2.5 rounded-full bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-2 shadow-sm">
+                            <span>Edit Workout</span>
+                        </button>
+                    ` : ''}
+
                     <button id="toggle-rest-day-btn" type="button"
                         class="px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm transition cursor-pointer flex items-center gap-2 shadow-sm ${
                             day.isRest 
                                 ? 'bg-black text-white hover:bg-gray-800' 
                                 : 'bg-cream text-dark border border-gray-300 hover:bg-gray-200'
                         }">
-                        <span>${day.isRest ? '⚡ Switch to Training Day' : '🛌 Set as Rest Day'}</span>
+                        <span>${day.isRest ? 'Switch to Training Day' : 'Set as Rest Day'}</span>
                     </button>
                 </div>
             </div>
@@ -153,8 +188,8 @@ function renderDayDetailPanel(dayId) {
                 </div>
             ` : `
                 <div class="p-6 bg-cream rounded-2xl border border-gray-200 text-center">
-                    <p class="text-3xl mb-1">🛌</p>
-                    <h3 class="text-lg font-bold text-dark">Rest &amp; Recovery Day</h3>
+                    <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-2">Rest &amp; Recovery Mode</span>
+                    <h3 class="text-lg font-bold text-dark">Scheduled Recovery Day</h3>
                     <p class="text-gray-600 text-sm mt-1 max-w-md mx-auto">
                         Rest days are essential for muscle repair, glycogen replenishment, and nervous system recovery.
                     </p>
@@ -168,57 +203,90 @@ function renderDayDetailPanel(dayId) {
                         <h3 class="text-base font-black text-dark">
                             Scheduled Exercises (${exerciseCount})
                         </h3>
-                        <button id="jump-to-library-btn" type="button"
-                            class="px-4 py-1.5 bg-black text-white rounded-full text-xs font-bold hover:bg-gray-800 transition flex items-center gap-1 cursor-pointer">
-                            <span>+ Add From Exercise Library</span>
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button id="open-editor-quick-btn" type="button"
+                                class="px-3.5 py-1.5 bg-cream border border-gray-300 text-dark rounded-full text-xs font-bold hover:bg-gray-200 transition flex items-center gap-1 cursor-pointer">
+                                <span>Full Editor</span>
+                            </button>
+                            <button id="jump-to-library-btn" type="button"
+                                class="px-4 py-1.5 bg-black text-white rounded-full text-xs font-bold hover:bg-gray-800 transition flex items-center gap-1 cursor-pointer">
+                                <span>+ Add From Exercise Library</span>
+                            </button>
+                        </div>
                     </div>
 
                     ${exerciseCount === 0 ? `
                         <div class="bg-gray-50 rounded-2xl p-8 border border-dashed border-gray-300 text-center space-y-3">
-                            <p class="text-2xl">📋</p>
+                            <div class="w-10 h-10 rounded-full bg-gray-200 text-dark font-black text-sm flex items-center justify-center mx-auto">0</div>
                             <h4 class="text-base font-bold text-dark">No exercises assigned yet</h4>
                             <p class="text-xs text-gray-500 max-w-sm mx-auto">
-                                Add movements from the Exercise Library to build your routine for ${escapeHtml(day.dayName)}.
+                                Add movements from the Exercise Library or open the Workout Editor to design your routine for ${escapeHtml(day.dayName)}.
                             </p>
-                            <button id="jump-to-library-empty-btn" type="button"
-                                class="px-5 py-2 bg-black text-white rounded-full text-xs font-bold hover:bg-gray-800 transition cursor-pointer">
-                                Browse Exercise Library
-                            </button>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <button id="editor-start-empty-btn" type="button"
+                                    class="px-5 py-2 bg-black text-white rounded-full text-xs font-bold hover:bg-gray-800 transition cursor-pointer">
+                                    Open Workout Editor
+                                </button>
+                                <button id="jump-to-library-empty-btn" type="button"
+                                    class="px-5 py-2 bg-cream text-dark border border-gray-300 rounded-full text-xs font-bold hover:bg-gray-200 transition cursor-pointer">
+                                    Browse Exercise Library
+                                </button>
+                            </div>
                         </div>
                     ` : `
-                        <div class="divide-y divide-gray-100 border border-gray-200 rounded-2xl overflow-hidden bg-white">
-                            ${day.exercises.map((ex, idx) => `
-                                <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition">
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-7 h-7 rounded-full bg-cream text-dark font-black text-xs flex items-center justify-center shrink-0 border border-gray-300">
-                                            ${idx + 1}
-                                        </span>
-                                        <div>
-                                            <h4 class="text-sm font-black text-dark">${escapeHtml(ex.name)}</h4>
-                                            <div class="flex items-center gap-2 mt-1">
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-700">
-                                                    ${escapeHtml(ex.muscleGroup)}
-                                                </span>
-                                                <span class="text-[10px] font-semibold text-gray-400">
-                                                    ${escapeHtml(ex.equipment)}
-                                                </span>
+                        <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white">
+                            <div class="divide-y divide-gray-100">
+                                ${day.exercises.map((ex, idx) => `
+                                    <div class="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 transition">
+                                        <div class="flex items-start gap-3.5">
+                                            <span class="w-7 h-7 rounded-full bg-cream text-dark font-black text-xs flex items-center justify-center shrink-0 border border-gray-300 mt-0.5">
+                                                ${idx + 1}
+                                            </span>
+                                            <div>
+                                                <div class="flex items-center gap-2 flex-wrap">
+                                                    <h4 class="text-sm sm:text-base font-black text-dark">${escapeHtml(ex.name)}</h4>
+                                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-black text-white">
+                                                        ${escapeHtml(ex.muscleGroup || 'General')}
+                                                    </span>
+                                                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-700">
+                                                        ${escapeHtml(ex.equipment || 'Bodyweight')}
+                                                    </span>
+                                                </div>
+
+                                                <!-- Coaching cues / Notes preview -->
+                                                ${ex.notes ? `
+                                                    <p class="text-xs text-gray-500 mt-1 max-w-lg leading-relaxed">
+                                                        <span class="font-bold text-gray-600">Note:</span> ${escapeHtml(ex.notes)}
+                                                    </p>
+                                                ` : ''}
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="flex items-center gap-4 self-end sm:self-center">
-                                        <span class="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-                                            ${ex.sets} sets × ${escapeHtml(ex.reps)}
-                                        </span>
-                                        <button type="button" data-remove-index="${idx}"
-                                            class="remove-exercise-btn text-xs font-bold text-red-600 hover:text-red-800 px-2.5 py-1 rounded-lg hover:bg-red-50 transition cursor-pointer"
-                                            title="Remove exercise from this day">
-                                            ✕ Remove
-                                        </button>
+                                        <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
+                                            <!-- Sets / Reps / Duration / Rest tags -->
+                                            <div class="flex items-center gap-1.5 flex-wrap">
+                                                <span class="text-xs font-black text-gray-800 bg-cream border border-gray-300 px-3 py-1 rounded-full">
+                                                    ${ex.sets || 3} sets × ${escapeHtml(ex.reps || '10-12')}
+                                                </span>
+                                                ${ex.duration ? `
+                                                    <span class="text-xs font-bold text-gray-700 bg-gray-100 px-2.5 py-1 rounded-full">
+                                                        ${escapeHtml(ex.duration)}
+                                                    </span>
+                                                ` : ''}
+                                                <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
+                                                    ${escapeHtml(ex.rest || '90s')} rest
+                                                </span>
+                                            </div>
+
+                                            <button type="button" data-remove-index="${idx}"
+                                                class="remove-exercise-btn text-xs font-bold text-red-600 hover:text-red-800 px-2.5 py-1 rounded-lg hover:bg-red-50 transition cursor-pointer"
+                                                title="Remove exercise from this day">
+                                                ✕
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            `).join('')}
+                                `).join('')}
+                            </div>
                         </div>
                     `}
                 </div>
@@ -228,6 +296,17 @@ function renderDayDetailPanel(dayId) {
     `;
 
     // Listeners for Day Detail Panel
+    const openEditorBtn = document.getElementById('open-editor-btn');
+    const openEditorQuickBtn = document.getElementById('open-editor-quick-btn');
+    const editorStartEmptyBtn = document.getElementById('editor-start-empty-btn');
+    [openEditorBtn, openEditorQuickBtn, editorStartEmptyBtn].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                startEditing(dayId);
+            });
+        }
+    });
+
     const toggleRestBtn = document.getElementById('toggle-rest-day-btn');
     if (toggleRestBtn) {
         toggleRestBtn.addEventListener('click', () => {
@@ -263,7 +342,6 @@ function renderDayDetailPanel(dayId) {
                 const libraryTabBtn = document.getElementById('tab-library');
                 if (libraryTabBtn) {
                     libraryTabBtn.click();
-                    // Scroll down smoothly to library
                     const libSection = document.getElementById('library-filters-container');
                     if (libSection) {
                         libSection.scrollIntoView({ behavior: 'smooth' });

@@ -34,8 +34,10 @@ function renderLibraryFilters() {
                     <input id="exercise-search-input" type="text" value="${escapeHtml(currentSearch)}"
                         placeholder="Search exercises by name, muscle, or equipment..."
                         class="w-full bg-white border border-gray-300 rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black">
-                    <span class="absolute left-4 top-3 text-gray-400">
-                        🔍
+                    <span class="absolute left-4 top-3.5 text-gray-400 flex items-center justify-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
                     </span>
                     ${currentSearch ? `<button id="clear-search-btn" class="absolute right-3.5 top-2.5 text-xs text-gray-400 hover:text-black">✕</button>` : ''}
                 </div>
@@ -168,7 +170,7 @@ export function renderLibraryList() {
             <div class="py-4">
                 <p class="text-xs font-semibold text-gray-500 mb-4">${countText}</p>
                 <div class="bg-white rounded-3xl p-10 text-center border border-gray-200">
-                    <p class="text-3xl mb-2">🔎</p>
+                    <div class="w-12 h-12 rounded-full bg-cream border border-gray-300 flex items-center justify-center mx-auto mb-3 text-dark font-black text-sm">0</div>
                     <h3 class="text-xl font-bold text-dark">No exercises found</h3>
                     <p class="text-gray-500 text-sm mt-1">Try clearing your filters or search keywords.</p>
                     <button id="reset-filters-btn" class="mt-4 px-5 py-2 bg-black text-white text-xs font-bold rounded-full hover:bg-gray-800 transition">
