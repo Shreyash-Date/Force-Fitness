@@ -1,11 +1,19 @@
 /**
- * Force Fitness — Workout Planner UI Shell Coordinator (Phase 1)
- * Manages responsive view switching, accessible navigation, and tab coordination.
- * Matches Force Fitness aesthetic (Cream, Slate, Dark, White palette).
+ * Force Fitness — Workout Planner UI Coordinator (Phase 2)
+ * Manages responsive view switching, accessible navigation, 7-day schedule, and exercise library.
  */
 
+import { initSchedule } from './schedule.js';
+import { initLibrary } from './library.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Tab Navigation Setup
+    // 1. Initialize Functional Schedule Engine (Phase 2)
+    initSchedule();
+
+    // 2. Initialize Exercise Library Catalog & Filters (Phase 2)
+    initLibrary();
+
+    // 3. Tab Navigation Setup
     const tabButtons = document.querySelectorAll('[role="tab"]');
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
 
@@ -69,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile nav toggle
+    // Mobile nav toggle if present
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuBtn && mobileMenu) {

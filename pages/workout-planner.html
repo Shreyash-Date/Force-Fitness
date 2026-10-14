@@ -66,8 +66,8 @@
                 <!-- Phase Pill Indicator -->
                 <div class="flex items-center gap-3 self-start md:self-auto">
                     <span class="inline-flex items-center gap-2 px-4 py-2 bg-cream text-dark border border-gray-300 rounded-full font-bold text-sm">
-                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                        Phase 1: UI Foundation
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        Phase 2: Schedule &amp; Library
                     </span>
                 </div>
             </div>
@@ -81,12 +81,15 @@
                         <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
                             7-Day Schedule
                         </h2>
-                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
-                            Organize Monday through Sunday routines with customizable splits and rest days.
+                        <p id="metric-split-title" class="mt-3 text-lg font-black text-dark">
+                            4-Day Split
+                        </p>
+                        <p id="metric-split-sub" class="text-gray-600 text-xs mt-1">
+                            4 Training / 3 Rest Days
                         </p>
                     </div>
-                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
-                        Phase 3 Engine
+                    <span class="mt-4 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 2 Active
                     </span>
                 </div>
 
@@ -96,12 +99,15 @@
                         <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
                             Exercise Library
                         </h2>
-                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
-                            Search and filter 40+ exercises by muscle group, difficulty, and equipment.
+                        <p id="metric-catalog-title" class="mt-3 text-lg font-black text-dark">
+                            32 Exercises
+                        </p>
+                        <p id="metric-catalog-sub" class="text-gray-600 text-xs mt-1">
+                            Catalog Active • Filterable
                         </p>
                     </div>
-                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
-                        Phase 2 Catalog
+                    <span class="mt-4 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 2 Active
                     </span>
                 </div>
 
@@ -124,14 +130,17 @@
                 <div class="bg-cream rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                     <div>
                         <h2 class="text-xl font-black border-b border-gray-300 pb-2 text-dark">
-                            Progress &amp; Stats
+                            Weekly Volume
                         </h2>
-                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">
-                            Review completion streaks, training volume, and saved history logs.
+                        <p id="metric-volume-title" class="mt-3 text-lg font-black text-dark">
+                            36 Sets / Wk
+                        </p>
+                        <p id="metric-volume-sub" class="text-gray-600 text-xs mt-1">
+                            Calculated from Routine
                         </p>
                     </div>
-                    <span class="mt-5 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
-                        Phase 7 Analytics
+                    <span class="mt-4 inline-flex w-fit px-3 py-1 bg-black text-white rounded-full font-semibold text-xs">
+                        Phase 2 Synchronized
                     </span>
                 </div>
 
@@ -174,126 +183,20 @@
                 
                 <!-- Tab Panel 1: Weekly Schedule (Active) -->
                 <div role="tabpanel" id="view-schedule" aria-labelledby="tab-schedule" class="space-y-6">
-                    
-                    <!-- Week Wireframe Grid (Mon - Sun) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 xl:gap-4">
-                        
-                        <!-- Mon -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Monday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 1</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
+                    <!-- Week Grid (Rendered dynamically by schedule.js) -->
+                    <div id="week-schedule-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 xl:gap-4"></div>
 
-                        <!-- Tue -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Tuesday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 2</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                        <!-- Wed -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Wednesday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 3</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                        <!-- Thu -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Thursday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 4</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                        <!-- Fri -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Friday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 5</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                        <!-- Sat -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Saturday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 6</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                        <!-- Sun -->
-                        <div class="bg-white rounded-2xl p-3.5 xl:p-4 border border-gray-200 shadow-sm flex flex-col justify-between min-h-32">
-                            <div class="flex items-center justify-between gap-1 font-black text-dark">
-                                <span class="text-sm xl:text-base">Sunday</span>
-                                <span class="text-[10px] xl:text-[11px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Day 7</span>
-                            </div>
-                            <p class="text-gray-500 text-xs my-2">No routine set</p>
-                            <span class="text-[11px] font-bold text-gray-400">Rest / Unassigned</span>
-                        </div>
-
-                    </div>
-
-                    <!-- Informative Empty State Card (Matches BMI app card style) -->
-                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
-                        <div class="max-w-md mx-auto space-y-4">
-                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
-                                📅
-                            </div>
-                            <h2 class="text-2xl font-black text-dark">
-                                7-Day Schedule Architecture
-                            </h2>
-                            <p class="text-gray-600 leading-relaxed text-sm">
-                                The interactive 7-day schedule grid, workout day assignments, and rest-day controls will be implemented in Phase 3.
-                            </p>
-                            <div class="pt-2">
-                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
-                                    Planned for Phase 3
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Selected Day Detail & Exercise Draft Panel (Rendered dynamically by schedule.js) -->
+                    <div id="selected-day-detail-panel"></div>
                 </div>
 
                 <!-- Tab Panel 2: Exercise Library (Hidden by default) -->
                 <div role="tabpanel" id="view-library" aria-labelledby="tab-library" class="hidden space-y-6" aria-hidden="true">
-                    
-                    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 text-center shadow-md">
-                        <div class="max-w-md mx-auto space-y-4">
-                            <div class="w-16 h-16 rounded-full bg-cream text-dark flex items-center justify-center mx-auto text-2xl font-black border-2 border-black">
-                                🏋️
-                            </div>
-                            <h2 class="text-2xl font-black text-dark">
-                                Exercise Library Database
-                            </h2>
-                            <p class="text-gray-600 leading-relaxed text-sm">
-                                The searchable exercise catalog with 40+ movements, muscle group filters, difficulty badges, and form guides will be integrated in Phase 2.
-                            </p>
-                            <div class="pt-2">
-                                <span class="inline-flex px-4 py-1.5 bg-gray-dark text-white rounded-full font-bold text-xs">
-                                    Planned for Phase 2
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Filter Controls (Rendered dynamically by library.js) -->
+                    <div id="library-filters-container" class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm"></div>
 
+                    <!-- Exercise Cards Grid (Rendered dynamically by library.js) -->
+                    <div id="library-list-container"></div>
                 </div>
 
                 <!-- Tab Panel 3: Active Workout (Hidden by default) -->
