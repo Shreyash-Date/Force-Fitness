@@ -217,7 +217,7 @@ function finishSession() {
             sets: ex.sets.map(s => ({
                 setNumber: s.setNumber,
                 reps: s.completed ? (s.reps ?? s.targetReps) : 0,
-                weight: s.weight ?? 0,
+                weight: (s.weight !== null && s.weight !== undefined && Number(s.weight) > 0) ? Number(s.weight) : null,
                 completed: s.completed
             }))
         })),
@@ -859,10 +859,14 @@ function renderCompletionScreen(record, elapsedMs) {
                         </div>
                     </div>
 
-                    <div class="pt-4">
+                    <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
                         <button data-action="new-workout"
-                            class="px-8 py-3 bg-black text-white rounded-full font-bold text-sm hover:bg-gray-800 hover:scale-105 active:scale-95 transition cursor-pointer shadow-md">
+                            class="px-6 py-3 bg-white text-dark border-2 border-gray-300 rounded-full font-bold text-sm hover:bg-gray-100 active:scale-95 transition cursor-pointer">
                             Start New Workout
+                        </button>
+                        <button data-action="view-analytics"
+                            class="px-6 py-3 bg-black text-white rounded-full font-bold text-sm hover:bg-gray-800 hover:scale-105 active:scale-95 transition cursor-pointer shadow-md">
+                            View in Analytics →
                         </button>
                     </div>
 
@@ -915,6 +919,12 @@ function setupEventDelegation() {
                 break;
             case 'new-workout':
                 renderStartScreen();
+                break;
+            case 'view-analytics':
+                {
+                    const analyticsTab = document.getElementById('tab-analytics');
+                    if (analyticsTab) analyticsTab.click();
+                }
                 break;
         }
     });

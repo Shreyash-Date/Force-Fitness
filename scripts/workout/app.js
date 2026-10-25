@@ -7,6 +7,7 @@ import { initSchedule } from './schedule.js';
 import { initLibrary } from './library.js';
 import { initGenerator } from './generator.js';
 import { initTracker, onTrackerTabActivated } from './tracker.js';
+import { initAnalytics, onAnalyticsTabActivated } from './analytics.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Functional Schedule Engine & Editor (Phase 3)
@@ -21,7 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Initialize Active Workout Tracker (Phase 4)
     initTracker();
 
-    // 5. Tab Navigation Setup
+    // 5. Initialize Progress & Analytics Engine (Phase 5)
+    initAnalytics();
+
+    // 6. Tab Navigation Setup
     const tabButtons = document.querySelectorAll('[role="tab"]');
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
 
@@ -54,6 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Notify tracker when its tab becomes visible (Phase 4)
         if (targetTabId === 'view-tracker') {
             onTrackerTabActivated();
+        }
+
+        // Notify analytics when its tab becomes visible (Phase 5)
+        if (targetTabId === 'view-analytics') {
+            onAnalyticsTabActivated();
         }
     }
 
