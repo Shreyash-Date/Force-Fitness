@@ -358,3 +358,48 @@ export function resetScheduleToDefault() {
     saveSchedule(DEFAULT_SCHEDULE);
     return JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
 }
+
+// ─── Phase 4: Active Session & Completion History ────────────────────────────
+
+const ACTIVE_SESSION_KEY = 'force_fitness_active_session_v1';
+const COMPLETED_SESSIONS_KEY = 'force_fitness_completed_sessions_v1';
+
+export function getActiveSession() {
+    try {
+        const raw = localStorage.getItem(ACTIVE_SESSION_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch (e) {
+        console.warn('Failed to parse active session, clearing.', e);
+        localStorage.removeItem(ACTIVE_SESSION_KEY);
+        return null;
+    }
+}
+
+export function saveActiveSession(session) {
+    if (!session) return;
+    session.lastSavedAt = Date.now();
+    localStorage.setItem(ACTIVE_SESSION_KEY, JSON.stringify(session));
+}
+
+export function clearActiveSession() {
+    localStorage.removeItem(ACTIVE_SESSION_KEY);
+}
+
+export function getCompletedSessions() {
+    try {
+        const raw = localStorage.getItem(COMPLETED_SESSIONS_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        console.warn('Failed to parse completed sessions.', e);
+        return [];
+    }
+}
+
+export function addCompletedSession(record) {
+    const sessions = getCompletedSessions();
+    sessions.push(record);
+    localStorage.setItem(COMPLETED_SESSIONS_KEY, JSON.stringify(sessions));
+}

@@ -6,6 +6,7 @@
 import { initSchedule } from './schedule.js';
 import { initLibrary } from './library.js';
 import { initGenerator } from './generator.js';
+import { initTracker, onTrackerTabActivated } from './tracker.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Functional Schedule Engine & Editor (Phase 3)
@@ -17,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Initialize Smart Workout Plan Generator (Phase 3)
     initGenerator();
 
-    // 4. Tab Navigation Setup
+    // 4. Initialize Active Workout Tracker (Phase 4)
+    initTracker();
+
+    // 5. Tab Navigation Setup
     const tabButtons = document.querySelectorAll('[role="tab"]');
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
 
@@ -46,6 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 panel.setAttribute('aria-hidden', 'true');
             }
         });
+
+        // Notify tracker when its tab becomes visible (Phase 4)
+        if (targetTabId === 'view-tracker') {
+            onTrackerTabActivated();
+        }
     }
 
     tabButtons.forEach(btn => {

@@ -57,48 +57,34 @@ function renderWeekGrid(schedule, selectedDayId) {
 
         return `
             <div data-day-id="${day.dayId}"
-                class="day-card bg-white rounded-2xl p-3.5 xl:p-4 border transition duration-200 cursor-pointer flex flex-col justify-between min-h-36 ${
+                class="day-card bg-white rounded-2xl p-3.5 xl:p-4 border transition duration-200 cursor-pointer flex flex-col justify-between min-h-[105px] ${
                     isSelected
                         ? 'border-black ring-2 ring-black bg-cream shadow-md -translate-y-1'
                         : 'border-gray-200 shadow-sm hover:border-gray-400 hover:shadow-md'
                 }">
                 <!-- Card Header -->
                 <div>
-                    <div class="flex items-center justify-between gap-1 font-black text-dark mb-1.5">
+                    <div class="flex items-center justify-between gap-1 font-black text-dark mb-1">
                         <span class="text-sm xl:text-base">${escapeHtml(day.dayName)}</span>
                         <span class="text-[10px] xl:text-[11px] px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0 ${
-                            day.isRest ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-700'
+                            isSelected ? 'bg-black text-white' : 'bg-gray-100 text-gray-700'
                         }">
                             Day ${day.dayNumber}
                         </span>
                     </div>
 
-                    <!-- Routine Title -->
-                    <p class="text-xs font-bold text-dark line-clamp-1 mb-1">
+                    <!-- Routine / Exercise Title -->
+                    <p class="text-xs font-bold text-dark truncate">
                         ${escapeHtml(day.routineName || (day.isRest ? 'Rest Day' : 'Workout Routine'))}
                     </p>
-
-                    <!-- Exercise Preview or Rest Message -->
-                    ${day.isRest ? `
-                        <span class="inline-flex px-2 py-0.5 rounded bg-gray-100 text-[10px] font-semibold text-gray-500">
-                            Rest &amp; Recovery
-                        </span>
-                    ` : `
-                        <p class="text-[11px] text-gray-500 line-clamp-2">
-                            ${exerciseCount === 0 
-                                ? '<span class="text-gray-400 italic">No exercises added yet</span>' 
-                                : day.exercises.slice(0, 2).map(e => escapeHtml(e.name)).join(', ') + (exerciseCount > 2 ? '...' : '')
-                            }
-                        </p>
-                    `}
                 </div>
 
                 <!-- Card Footer Info -->
-                <div class="mt-3 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
-                    <span class="font-bold ${day.isRest ? 'text-gray-400' : 'text-emerald-600'}">
+                <div class="mt-3 pt-2 border-t border-gray-100 flex items-center justify-between gap-1.5 text-[11px]">
+                    <span class="font-bold ${day.isRest ? 'text-gray-400' : 'text-emerald-600'} truncate">
                         ${day.isRest ? 'Rest Day' : `${exerciseCount} exercise${exerciseCount === 1 ? '' : 's'}`}
                     </span>
-                    ${isSelected ? '<span class="text-[10px] font-bold text-black uppercase tracking-wider">● Selected</span>' : ''}
+                    ${isSelected ? '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-black text-white uppercase tracking-wider shrink-0">Selected</span>' : ''}
                 </div>
             </div>
         `;
