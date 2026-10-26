@@ -144,6 +144,15 @@ export function computeDurationStats(sessions) {
     };
 }
 
+function parseLocalDate(dateStr) {
+    if (!dateStr || typeof dateStr !== 'string') return new Date();
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+        return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    }
+    return new Date(dateStr);
+}
+
 export function computeStreakStats(sessions) {
     if (!sessions || sessions.length === 0) {
         return { currentStreak: 0, longestStreak: 0 };
@@ -174,7 +183,7 @@ export function computeStreakStats(sessions) {
     let currentStreak = 0;
     if (sortedDates[0] === todayStr || sortedDates[0] === yesterdayStr) {
         currentStreak = 1;
-        let prevDate = new Date(sortedDates[0]);
+        let prevDate = parseLocalDate(sortedDates[0]);
 
         for (let i = 1; i < sortedDates.length; i++) {
             const expectedPrev = new Date(prevDate);
@@ -194,7 +203,7 @@ export function computeStreakStats(sessions) {
     let longestStreak = 1;
     let tempStreak = 1;
     for (let i = 1; i < sortedDates.length; i++) {
-        const curr = new Date(sortedDates[i - 1]);
+        const curr = parseLocalDate(sortedDates[i - 1]);
         curr.setDate(curr.getDate() - 1);
         if (getDayString(curr) === sortedDates[i]) {
             tempStreak++;

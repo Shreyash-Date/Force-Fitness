@@ -9,7 +9,8 @@ import {
     getActiveSession,
     saveActiveSession,
     clearActiveSession,
-    addCompletedSession
+    addCompletedSession,
+    getPreferences
 } from './storage.js';
 import { escapeHtml } from './utils.js';
 
@@ -388,6 +389,8 @@ function updateTimerDisplays() {
 
 function playRestEndSound() {
     try {
+        const prefs = getPreferences();
+        if (prefs && prefs.soundEnabled === false) return;
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -657,6 +660,7 @@ function renderExerciseCard(exercise, exIdx) {
 
 function renderSetsSection(exercise, exIdx) {
     const completedCount = exercise.sets.filter(s => s.completed).length;
+    const unit = getPreferences().weightUnit || 'kg';
 
     const setRows = exercise.sets.map((set, sIdx) => {
         if (set.completed) {
@@ -671,7 +675,7 @@ function renderSetsSection(exercise, exIdx) {
                     <div class="flex-1 flex flex-wrap items-center gap-x-4 gap-y-1">
                         <span class="text-sm font-bold text-emerald-800">Set ${set.setNumber}</span>
                         <span class="text-sm text-emerald-700">${set.reps ?? set.targetReps} reps</span>
-                        ${set.weight ? `<span class="text-sm text-emerald-600">${set.weight} lbs</span>` : ''}
+                        ${set.weight ? `<span class="text-sm text-emerald-600">${set.weight} ${unit}</span>` : ''}
                     </div>
                 </div>`;
         }
@@ -696,7 +700,7 @@ function renderSetsSection(exercise, exIdx) {
                                 value="${set.targetReps}" min="0" max="999" />
                         </div>
                         <div class="flex flex-col">
-                            <label for="weight-input-${exIdx}-${sIdx}" class="text-[10px] font-bold text-gray-500 uppercase mb-1">Weight (lbs)</label>
+                            <label for="weight-input-${exIdx}-${sIdx}" class="text-[10px] font-bold text-gray-500 uppercase mb-1">Weight (${unit})</label>
                             <input type="number" id="weight-input-${exIdx}-${sIdx}"
                                 class="set-input w-24 px-3 py-2 border-2 border-gray-300 rounded-xl text-center font-bold text-dark text-sm focus:border-black focus:outline-none transition"
                                 placeholder="—" min="0" max="9999" step="2.5" />

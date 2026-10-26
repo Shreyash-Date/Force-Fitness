@@ -9,7 +9,10 @@ import { initGenerator } from './generator.js';
 import { initTracker, onTrackerTabActivated } from './tracker.js';
 import { initAnalytics, onAnalyticsTabActivated } from './analytics.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
+    if (window.__FORCE_FITNESS_APP_INITIALIZED__) return;
+    window.__FORCE_FITNESS_APP_INITIALIZED__ = true;
+
     // 1. Initialize Functional Schedule Engine & Editor (Phase 3)
     initSchedule();
 
@@ -128,4 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', () => menuBtn.click());
         });
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
